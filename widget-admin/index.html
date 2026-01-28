@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Widget Admin</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <main class="admin">
+      <section class="admin__panel">
+        <h1>Визуальная админка виджета</h1>
+        <form id="widget-form" class="admin__form">
+          <div class="field">
+            <label for="bubble-text">Текст bubble</label>
+            <textarea id="bubble-text" name="bubble" rows="3"></textarea>
+          </div>
+          <div class="field">
+            <label for="phone">Телефон</label>
+            <input id="phone" name="phone" type="tel" />
+          </div>
+          <div class="field">
+            <label for="side">Сторона по умолчанию</label>
+            <select id="side" name="side">
+              <option value="right">Правша</option>
+              <option value="left">Левша</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="wa">WhatsApp (ссылка)</label>
+            <input id="wa" name="wa" type="url" />
+          </div>
+          <div class="field">
+            <label for="tg">Telegram (ссылка)</label>
+            <input id="tg" name="tg" type="url" />
+          </div>
+        </form>
+        <section class="admin__install">
+          <h2>Установка виджета на сайт</h2>
+          <p class="admin__hint">Вставьте код перед закрывающим тегом &lt;/body&gt; на сайте.</p>
+          <div class="admin__code">
+            <code id="embed-code"></code>
+            <button id="copy-code" type="button">Скопировать</button>
+          </div>
+        </section>
+      </section>
+      <section class="admin__preview">
+        <h2>Live preview</h2>
+        <div class="phone">
+          <div class="phone__screen" id="preview"></div>
+        </div>
+      </section>
+    </main>
+    <script src="admin.js" defer></script>
+  </body>
+</html>

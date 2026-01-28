@@ -1,0 +1,210 @@
+:root {
+  --aw-size: 56px;
+  --aw-glass-bg: rgba(255, 255, 255, 0.18);
+  --aw-glass-border: rgba(255, 255, 255, 0.4);
+  --aw-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  --aw-text: #111827;
+  --aw-radius: 999px;
+  --aw-transition: 260ms cubic-bezier(0.2, 0.8, 0.2, 1.1);
+  --aw-safe-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+.aw-root {
+  position: fixed;
+  bottom: var(--aw-safe-bottom);
+  z-index: 9999;
+  pointer-events: none;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.aw-root * {
+  box-sizing: border-box;
+}
+
+.aw-right {
+  right: 16px;
+}
+
+.aw-left {
+  left: 16px;
+}
+
+.aw-fab {
+  width: var(--aw-size);
+  height: var(--aw-size);
+  border-radius: 50%;
+  border: 1px solid var(--aw-glass-border);
+  background: var(--aw-glass-bg);
+  backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: var(--aw-shadow);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--aw-transition), box-shadow var(--aw-transition);
+}
+
+.aw-fab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0));
+  opacity: 0.6;
+}
+
+.aw-fab img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.aw-bubble {
+  position: absolute;
+  bottom: calc(var(--aw-size) + 12px);
+  max-width: 220px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: var(--aw-glass-bg);
+  border: 1px solid var(--aw-glass-border);
+  backdrop-filter: blur(16px) saturate(160%);
+  color: var(--aw-text);
+  font-size: 13px;
+  line-height: 1.3;
+  box-shadow: var(--aw-shadow);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--aw-transition), transform var(--aw-transition);
+  pointer-events: none;
+}
+
+.aw-right .aw-bubble {
+  right: 0;
+}
+
+.aw-left .aw-bubble {
+  left: 0;
+}
+
+.aw-root[data-open="false"] .aw-bubble {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aw-panels {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.aw-right .aw-panels {
+  right: calc(var(--aw-size) + 10px);
+}
+
+.aw-left .aw-panels {
+  left: calc(var(--aw-size) + 10px);
+}
+
+.aw-actions,
+.aw-messengers {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.aw-actions {
+  flex-direction: row;
+}
+
+.aw-messengers {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.aw-action,
+.aw-messenger,
+.aw-side-toggle {
+  border-radius: 999px;
+  border: 1px solid var(--aw-glass-border);
+  background: var(--aw-glass-bg);
+  backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: var(--aw-shadow);
+  color: var(--aw-text);
+  font-size: 12px;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: transform var(--aw-transition), opacity var(--aw-transition);
+}
+
+.aw-messenger img {
+  width: 18px;
+  height: 18px;
+}
+
+.aw-action[data-type="chat"] {
+  font-weight: 600;
+}
+
+.aw-side-toggle {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.aw-root[data-open="false"] .aw-panels {
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity var(--aw-transition), transform var(--aw-transition);
+}
+
+.aw-root[data-open="true"] .aw-panels {
+  opacity: 1;
+  transform: translateY(-4px) scale(1);
+  transition: opacity var(--aw-transition), transform var(--aw-transition);
+}
+
+.aw-root[data-open="true"] .aw-fab {
+  transform: scale(0.94);
+}
+
+@media (max-width: 768px) {
+  .aw-root {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .aw-root {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --aw-transition: 200ms ease;
+  }
+
+  .aw-root[data-open="true"] .aw-panels,
+  .aw-root[data-open="false"] .aw-panels {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .aw-fab,
+  .aw-bubble,
+  .aw-action,
+  .aw-messenger,
+  .aw-side-toggle {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.2));
+  }
+}
