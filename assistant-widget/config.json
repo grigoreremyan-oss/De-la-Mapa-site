@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "sideDefault": "right",
+  "fab": {
+    "logoUrl": "/uploads/assistant-widget/fab.webp"
+  },
+  "texts": {
+    "bubble": "Как могу вам помочь? Нужна помощь с бронированием?"
+  },
+  "phone": {
+    "enabled": true,
+    "label": "Позвонить",
+    "tel": "+431234567"
+  },
+  "messengers": [
+    {
+      "id": "whatsapp",
+      "enabled": true,
+      "iconUrl": "/uploads/assistant-widget/wa.svg",
+      "label": "WhatsApp",
+      "href": "https://wa.me/431234567"
+    },
+    {
+      "id": "telegram",
+      "enabled": true,
+      "iconUrl": "/uploads/assistant-widget/tg.svg",
+      "label": "Telegram",
+      "href": "https://t.me/hotel"
+    }
+  ],
+  "actions": [
+    {
+      "id": "booking",
+      "enabled": true,
+      "title": "Бронирование",
+      "type": "link",
+      "href": "/booking"
+    },
+    {
+      "id": "offers",
+      "enabled": true,
+      "title": "Акции",
+      "type": "link",
+      "href": "/offers"
+    },
+    {
+      "id": "chat",
+      "enabled": true,
+      "title": "Написать",
+      "type": "chat"
+    }
+  ]
+}
